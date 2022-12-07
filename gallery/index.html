@@ -25,31 +25,23 @@
     <button class="modal__next js--modal__next">Next</button>
 </div>
 <script>
-
     $(function () {
         $('.js--gal_item').on('click', function (e) {
             $('.modal').css('display','block')
             $(this).addClass('current')
             $('.modal__content img').attr('src', $('.js--gal_item.current').find('img').attr('src'));
             e.preventDefault();
-
         })
         $('.modal__close').on('click', function () {
             $('.modal').css("display", "none");
             $('.js--gal_item').removeClass('current')
         })
-
         $('.modal__next').on('click', function () {
             nextSlide();
         });
-
         $('.modal__prev').click(function () {
             prevSlide();
         });
-
-
-
-
         function nextSlide() {
             let activeElement = $('.js--gal_item.current')
             const nextItem = activeElement.next()
@@ -58,9 +50,7 @@
                 activeElement.removeClass('current');
                 $('.modal__content').find('img').attr('src',nextItem.find('img').attr('src'));
             }
-
         }
-
         function prevSlide() {
             let activeElement = $('.js--gal_item.current')
             const prevItem = activeElement.prev()
