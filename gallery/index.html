@@ -30,12 +30,13 @@
         $('.js--gal_item').on('click', function (e) {
             $('.modal').css('display','block')
             $(this).addClass('current')
-            $('.modal__content img').attr('src', $(this).attr('src'));
+            $('.modal__content img').attr('src', $('.js--gal_item.current').find('img').attr('src'));
             e.preventDefault();
 
         })
         $('.modal__close').on('click', function () {
             $('.modal').css("display", "none");
+            $('.js--gal_item').removeClass('current')
         })
 
         $('.modal__next').on('click', function () {
@@ -61,7 +62,13 @@
         }
 
         function prevSlide() {
-
+            let activeElement = $('.js--gal_item.current')
+            const prevItem = activeElement.prev()
+            if (prevItem.is('li')){
+                prevItem.addClass('current');
+                activeElement.removeClass('current');
+                $('.modal__content').find('img').attr('src',prevItem.find('img').attr('src'));
+            }
         }
     })
 </script>
