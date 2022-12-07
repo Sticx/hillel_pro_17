@@ -25,18 +25,11 @@
     <button class="modal__next js--modal__next">Next</button>
 </div>
 <script>
-    const ArrayImageSrc =[];
-    $('.js--gal_item').each(function () {
-        ArrayImageSrc.push($(this).find('img').attr('src'))
-    })
-    let slideNow = 1;
-    let slideCount = $('.gallery').children().length;
-    let slideInterval = 3000;
-    let navBtnId = 0;
-    let translateWidth = 0;
+
     $(function () {
-        $('.gallery__item img').on('click', function (e) {
-            $('.modal').css("display", "block")
+        $('.js--gal_item').on('click', function (e) {
+            $('.modal').css('display','block')
+            $(this).addClass('current')
             $('.modal__content img').attr('src', $(this).attr('src'));
             e.preventDefault();
 
@@ -54,43 +47,21 @@
         });
 
 
+
+
         function nextSlide() {
-            // if (slideNow === slideCount || slideNow <= 0 || slideNow > slideCount) {
-            //     $('.gallery').css('transform', 'translate(0, 0)');
-            //     slideNow = 1;
-            // } else {
-            //     translateWidth = -$('.gallery').width() * (slideNow);
-            //     $('.gallery__item').css({
-            //         'transform': 'translate(' + translateWidth + 'px, 0)',
-            //         '-webkit-transform': 'translate(' + translateWidth + 'px, 0)',
-            //         '-ms-transform': 'translate(' + translateWidth + 'px, 0)',
-            //     });
-            //     slideNow++;
-            // }
-            // console.log($('.gallery__item').next)
-            // $(ArrayImageSrc).next()
-            $('.modal__content img').next().attr('src');
+            let activeElement = $('.js--gal_item.current')
+            const nextItem = activeElement.next()
+            if (nextItem.is('li')){
+                nextItem.addClass('current');
+                activeElement.removeClass('current');
+                $('.modal__content').find('img').attr('src',nextItem.find('img').attr('src'));
+            }
+
         }
 
         function prevSlide() {
-            // if (slideNow === 1 || slideNow <= 0 || slideNow > slideCount) {
-            //     translateWidth = -$('#viewport').width() * (slideCount - 1);
-            //     $('.gallery').css({
-            //         'transform': 'translate(' + translateWidth + 'px, 0)',
-            //         '-webkit-transform': 'translate(' + translateWidth + 'px, 0)',
-            //         '-ms-transform': 'translate(' + translateWidth + 'px, 0)',
-            //     });
-            //     slideNow = slideCount;
-            // } else {
-            //     translateWidth = -$('#viewport').width() * (slideNow - 2);
-            //     $('#slidewrapper').css({
-            //         'transform': 'translate(' + translateWidth + 'px, 0)',
-            //         '-webkit-transform': 'translate(' + translateWidth + 'px, 0)',
-            //         '-ms-transform': 'translate(' + translateWidth + 'px, 0)',
-            //     });
-            //     slideNow--;
-            // }
-            $(this.ArrayImageSrc.length - 1)
+
         }
     })
 </script>
